@@ -1,0 +1,28 @@
+[package]
+name = "temp_env_vars_macro"
+description = "Resets all environment variables changed in a defined scope"
+license = "MIT"
+version = "0.1.0"
+authors = ["Günther Grill <grill.guenther@gmail.com>"]
+edition = "2021"
+repository = "https://github.com/guenhter/temp_env_vars"
+readme = "README.adoc"
+categories = ["development-tools::testing"]
+keywords = ["testing", "env", "env-variables", "env-vars"]
+
+[dependencies]
+quote = "1.0.36"
+syn = "2.0.74"
+temp_env_vars_core = { path = "../temp_env_vars_core" }
+
+[dev-dependencies]
+assertor = "0.0.2"
+serial_test = "3.1.1"
+anyhow = "1.0.86"
+
+[lib]
+proc-macro = true
+
+[features]
+default = []
+debug_temp_env_vars = []

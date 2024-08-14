@@ -1,0 +1,60 @@
+= Temporary Environment Variables
+
+A crate to deal with environment variable changes specially during tests.
+
+== Installation
+
+```bash
+cargo add temp_env_vars --dev
+```
+
+or
+
+```toml
+[dev-dependencies]
+temp_env_vars = "0.1"
+```
+
+
+== Usage
+
+Use with `#[temp_env_vars]`
+
+```Rust
+#[test]
+#[temp_env_vars]
+fn test_some() {
+    std::env::set_var("FOO", "BAR");
+    assert_eq!(std::env::var("FOO").unwrap(), "BAR");
+
+    // Env vars get reset when test is done
+}
+```
+
+
+Use with `TestEnvScope`
+
+```Rust
+#[test]
+#[serial] // Advices to use serial, alse parallel tests could mix up envs
+fn test_some() {
+    let _env_scope = TestEnvScope::new();
+    std::env::set_var("FOO", "BAR");
+    assert_eq!(std::env::var("FOO").unwrap(), "BAR");
+
+    // After "_env_scope" goes out of scope, all vars are restored
+}
+
+#[test]
+#[serial] // Advices to use serial, alse parallel tests could mix up envs
+fn test_bar() {
+    let _env_scope = TestEnvScope::new();
+    std::env::set_var("FOO", "BAR");
+    assert_eq!(std::env::var("FOO").unwrap(), "BAR");
+
+    drop(_env_scope); // After "_env_scope" goes out of scope, all vars are restored
+
+
+    // "FOO" is not longer set here.
+}
+```
