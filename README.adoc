@@ -2,17 +2,15 @@
 
 A crate to deal with environment variable changes specially during tests.
 
+WARNING: The software currently in the starting phase and will change
+
 == Installation
 
-```bash
-cargo add temp_env_vars --dev
-```
-
-or
+WARNING: This crate is not yet available via crates.io (comming soon)
 
 ```toml
-[dev-dependencies]
-temp_env_vars = "0.1"
+temp_env_vars = { git = "https://github.com/guenhter/temp_env_vars.git", branch = "main" }
+temp_env_vars_core = { git = "https://github.com/guenhter/temp_env_vars.git", branch = "main" }
 ```
 
 
