@@ -65,7 +65,7 @@ mod tests {
 
         {
             let _env_scope = TestEnvScope::new();
-            std::env::set_var("FOO", "BAR");
+            std::env::set_var("FOO", "BAR1");
         }
 
         let after: HashMap<String, String> = std::env::vars().collect();
@@ -76,7 +76,7 @@ mod tests {
     #[test]
     #[serial]
     fn test_changed_vars_are_reset() {
-        std::env::set_var("FOO", "BAR");
+        std::env::set_var("FOO", "BAR2");
         let original: HashMap<String, String> = std::env::vars().collect();
 
         {
@@ -85,14 +85,14 @@ mod tests {
         }
 
         let after: HashMap<String, String> = std::env::vars().collect();
-        assert_that!(std::env::var("FOO")).has_ok("BAR".to_string());
+        assert_that!(std::env::var("FOO")).has_ok("BAR2".to_string());
         assert_that!(after).is_equal_to(original);
     }
 
     #[test]
     #[serial]
     fn test_env_vars_are_restored() {
-        std::env::set_var("FOO", "BAR");
+        std::env::set_var("FOO", "BAR3");
         let original: HashMap<String, String> = std::env::vars().collect();
 
         {
@@ -101,20 +101,20 @@ mod tests {
         }
 
         let after: HashMap<String, String> = std::env::vars().collect();
-        assert_that!(std::env::var("FOO")).has_ok("BAR".to_string());
+        assert_that!(std::env::var("FOO")).has_ok("BAR3".to_string());
         assert_that!(after).is_equal_to(original);
     }
 
     #[test]
     #[serial]
     fn test_two_scopes_active_at_same_time() {
-        assert_that!(std::env::var("FOO")).is_err();
+        std::env::remove_var("FOO");
 
         {
             let _env_scope_1 = TestEnvScope::new();
             let _env_scope_2 = TestEnvScope::new();
 
-            std::env::set_var("FOO", "BAR");
+            std::env::set_var("FOO", "BAR4");
             assert_that!(std::env::var("FOO")).is_ok();
         }
 
@@ -124,12 +124,12 @@ mod tests {
     #[test]
     #[serial]
     fn test_sequential_test_scopes() {
-        assert_that!(std::env::var("FOO")).is_err();
+        std::env::remove_var("FOO");
 
         {
             let _env_scope = TestEnvScope::new();
 
-            std::env::set_var("FOO", "BAR");
+            std::env::set_var("FOO", "BAR5");
             assert_that!(std::env::var("FOO")).is_ok();
         }
         assert_that!(std::env::var("FOO")).is_err();
@@ -137,7 +137,7 @@ mod tests {
         {
             let _env_scope = TestEnvScope::new();
 
-            std::env::set_var("FOO", "BAR");
+            std::env::set_var("FOO", "BAR6");
             assert_that!(std::env::var("FOO")).is_ok();
         }
         assert_that!(std::env::var("FOO")).is_err();
