@@ -1,12 +1,30 @@
 = Temporary Environment Variables
 
+:caution-caption: :fire:
+:status:
+:url-repo: https://github.com/guenhter/temp_env_vars
+
+
+ifdef::status[]
+image:https://img.shields.io/crates/l/serial_test.svg[MIT license,link={url-repo}/blob/main/LICENSE]
+image:{url-repo}/workflows/CI/badge.svg[Build Status (GitHub Actions),link={url-repo}/actions]
+endif::[]
+
+
 A crate to deal with environment variable changes specially during tests.
 
-WARNING: The software currently in the starting phase and will change
+[CAUTION]
+====
+The software currently in the starting phase and will change
+====
 
 == Installation
 
-WARNING: This crate is not yet available via crates.io (comming soon)
+
+[CAUTION]
+====
+This crate is not yet available via crates.io (comming soon)
+====
 
 ```toml
 temp_env_vars = { git = "https://github.com/guenhter/temp_env_vars.git", branch = "main" }
