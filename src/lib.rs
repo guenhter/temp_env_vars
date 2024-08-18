@@ -10,6 +10,7 @@ mod test {
     use temp_env_vars_core::TestEnvScope;
 
     #[test]
+    #[serial] // Advised to use serial_test if other env-tests are not used with annotated with "temp_env_vars"
     #[temp_env_vars]
     fn test_with_macro() {
         assert_that!(std::env::var("FOO")).is_err();
