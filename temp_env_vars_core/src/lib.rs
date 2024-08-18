@@ -1,3 +1,43 @@
+//! # temp_env_vars_core
+//!
+//! `temp_env_vars_core` allows to to manipulate enviornment variables during a test
+//! and reset all changes when the test is done.
+//!
+//! ## Usage
+//!
+//! If resetting the env vars when the test completes is sufficient, the macro form
+//! `#[temp_env_vars]` is recommended over this crate.
+//!
+//! If resetting the environment variables after the test execution is not sufficient,
+//! but the reset must happen somewhere within the test, the `TestEnvScope` can be
+//! used to have better control.
+//!
+//! Whenever the created `TestEnvScope` goes out of scope, all env vars are reset.
+//!
+//! ```rust
+//! #[test]
+//! #[serial] // Advices to use serial, alse parallel tests could mix up envs
+//! fn test_some() {
+//!     let _env_scope = TestEnvScope::new();
+//!     std::env::set_var("FOO", "BAR");
+//!     assert_eq!(std::env::var("FOO").unwrap(), "BAR");
+//!
+//!     // After "_env_scope" goes out of scope, all vars are restored
+//! }
+//!
+//! #[test]
+//! #[serial] // Advices to use serial, alse parallel tests could mix up envs
+//! fn test_bar() {
+//!     let _env_scope = TestEnvScope::new();
+//!     std::env::set_var("FOO", "BAR");
+//!     assert_eq!(std::env::var("FOO").unwrap(), "BAR");
+//!
+//!     drop(_env_scope); // After "_env_scope" goes out of scope, all vars are restored
+//!
+//!
+//!     // "FOO" is not longer set here.
+//! }
+//! ```
 use std::{
     collections::HashMap,
     sync::{Arc, LazyLock, Mutex},
@@ -5,6 +45,7 @@ use std::{
 
 // Makes the mutex available for the `temp_env_vars` macro. Unfortunately, Macro traits cannot
 // export other types than macros, so this is the least bad place to export this then.
+#[doc(hidden)]
 pub static TEMP_ENV_VAR_MACRO_MUTEX: LazyLock<Arc<Mutex<()>>> = LazyLock::new(Arc::default);
 
 pub struct TestEnvScope {

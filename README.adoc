@@ -10,8 +10,7 @@ image:https://img.shields.io/crates/l/serial_test.svg[MIT license,link={url-repo
 image:{url-repo}/workflows/CI/badge.svg[Build Status (GitHub Actions),link={url-repo}/actions]
 endif::[]
 
-
-A crate to deal with environment variable changes specially during tests.
+`temp_env_vars` allows to to manipulate enviornment variables during a test and reset all changes when the test is done.
 
 [CAUTION]
 ====
@@ -34,9 +33,21 @@ temp_env_vars_core = { git = "https://github.com/guenhter/temp_env_vars.git", br
 
 == Usage
 
-Use with `#[temp_env_vars]`
+`temp_env_vars` can be used in two different forms:
 
-```Rust
+. as macro `#[temp_env_vars]`
+. with `TestEnvScope::new()`
+
+
+=== Use as macro
+
+`#[temp_env_vars]` is the preferred way to use the `temp_env_vars` crate.
+Every change to envionrment variables within the execution of the test function
+will be reset after the test has ended.
+
+If more tests are used with this macro, those tests will be executed sequentially to avoid an enviornment variable mixup.
+
+```rust
 #[test]
 #[temp_env_vars]
 fn test_some() {
@@ -48,9 +59,13 @@ fn test_some() {
 ```
 
 
-Use with `TestEnvScope`
+=== Use with TestEnvScope
 
-```Rust
+If resetting the environment variables after the test execution is not sufficient, but the reset must happen somewhere within the test, the `TestEnvScope` can be used to have better control.
+
+Whenever the created `TestEnvScope` goes out of scope, all env vars are reset.
+
+```rust
 #[test]
 #[serial] // Advices to use serial, alse parallel tests could mix up envs
 fn test_some() {
