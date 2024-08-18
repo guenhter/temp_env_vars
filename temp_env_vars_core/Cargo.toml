@@ -1,14 +1,17 @@
 [package]
 name = "temp_env_vars_core"
-description = "Resets all environment variables changed in a defined scope"
-license = "MIT"
 version = "0.1.0"
 authors = ["Günther Grill <grill.guenther@gmail.com>"]
 edition = "2021"
+rust-version = "1.80"
+description = "Resets all environment variables changed in a defined scope"
+readme = "../README.adoc"
+homepage = "https://github.com/guenhter/temp_env_vars"
 repository = "https://github.com/guenhter/temp_env_vars"
-readme = "README.adoc"
-categories = ["development-tools::testing"]
+license = "MIT"
 keywords = ["testing", "env", "env-variables", "env-vars"]
+categories = ["development-tools::testing"]
+exclude = [".github/", ".vscode/"]
 
 [dependencies]
 

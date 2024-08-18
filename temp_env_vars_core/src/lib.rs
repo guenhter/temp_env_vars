@@ -44,7 +44,7 @@ use std::{
 };
 
 // Makes the mutex available for the `temp_env_vars` macro. Unfortunately, Macro traits cannot
-// export other types than macros, so this is the least bad place to export this then.
+// export other types than macros, so this is the least bad place to export this.
 #[doc(hidden)]
 pub static TEMP_ENV_VAR_MACRO_MUTEX: LazyLock<Arc<Mutex<()>>> = LazyLock::new(Arc::default);
 
