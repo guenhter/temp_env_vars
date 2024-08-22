@@ -48,6 +48,7 @@ use std::{
 #[doc(hidden)]
 pub static TEMP_ENV_VAR_MACRO_MUTEX: LazyLock<Arc<Mutex<()>>> = LazyLock::new(Arc::default);
 
+#[derive(Debug)]
 pub struct TestEnvScope {
     original_vars: HashMap<String, String>,
 }
