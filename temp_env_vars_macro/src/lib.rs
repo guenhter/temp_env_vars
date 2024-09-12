@@ -42,9 +42,14 @@ pub fn temp_env_vars(
         }
     };
 
+    // The "#[serial]" macro should be applied before the "#[temp_env_vars]" macro
+    if gen.to_string().contains("serial_test ::") {
+        panic!("Apply the '#[serial]' after the '#[temp_env_vars]' macro");
+    }
+
     #[cfg(all(feature = "debug_temp_env_vars", not(test)))]
     {
-        std::fs::write("target/temp_env_vars_debug.rs", code.to_string()).unwrap();
+        std::fs::write("target/temp_env_vars_debug.rs", gen.to_string()).unwrap();
         std::process::Command::new("rustfmt")
             .arg("target/temp_env_vars_debug.rs")
             .spawn()
