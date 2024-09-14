@@ -27,7 +27,6 @@ This crate is not yet available via crates.io (comming soon)
 
 ```toml
 temp_env_vars = { git = "https://github.com/guenhter/temp_env_vars.git", branch = "main" }
-temp_env_vars_core = { git = "https://github.com/guenhter/temp_env_vars.git", branch = "main" }
 ```
 
 

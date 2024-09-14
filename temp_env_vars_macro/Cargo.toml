@@ -16,12 +16,12 @@ exclude = [".github/", ".vscode/"]
 [dependencies]
 quote = "1.0.36"
 syn = { version = "2.0.74", features = ["full"] }
-temp_env_vars_core = { version = "0.1.0", path = "../temp_env_vars_core" }
 
 [dev-dependencies]
 assertor = "0.0.2"
 serial_test = "3.1.1"
 anyhow = "1.0.86"
+temp_env_vars = { version = "0.1.0", path = ".." }
 
 [lib]
 proc-macro = true
