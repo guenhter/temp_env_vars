@@ -19,14 +19,8 @@ The software currently in the starting phase and will change
 
 == Installation
 
-
-[CAUTION]
-====
-This crate is not yet available via crates.io (comming soon)
-====
-
-```toml
-temp_env_vars = { git = "https://github.com/guenhter/temp_env_vars.git", branch = "main" }
+```bash
+cargo add temp_env_vars
 ```
 
 
