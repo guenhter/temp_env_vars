@@ -1,45 +1,35 @@
-= Temporary Environment Variables
+# Temporary Environment Variables
 
-:caution-caption: :fire:
-:status:
-:url-repo: https://github.com/guenhter/temp_env_vars
+[![Version](https://img.shields.io/crates/v/temp_env_vars.svg)](https://crates.io/crates/temp_env_vars)
+[![Downloads](https://img.shields.io/crates/d/temp_env_vars)](https://crates.io/crates/temp_env_vars)
+[![MIT license](https://img.shields.io/crates/l/temp_env_vars.svg)](./LICENSE)
+[![Build Status](https://github.com/guenhter/temp_env_vars/workflows/CI/badge.svg?branch=main)](https://github.com/guenhter/temp_env_vars/actions)
+[![MSRV: 1.80.0](https://flat.badgen.net/badge/MSRV/1.80.0/purple)](https://blog.rust-lang.org/2024/07/25/Rust-1.80.0.html)
 
-
-ifdef::status[]
-image:https://img.shields.io/crates/l/serial_test.svg[MIT license,link={url-repo}/blob/main/LICENSE]
-image:{url-repo}/workflows/CI/badge.svg[Build Status (GitHub Actions),link={url-repo}/actions]
-endif::[]
 
 `temp_env_vars` allows to to manipulate enviornment variables during a test and reset all changes when the test is done.
 
-[CAUTION]
-====
+[!WARNING]
+
 The software currently in the starting phase and will change
-====
-
-== Installation
 
 
-[CAUTION]
-====
-This crate is not yet available via crates.io (comming soon)
-====
+## Installation
 
-```toml
-temp_env_vars = { git = "https://github.com/guenhter/temp_env_vars.git", branch = "main" }
-temp_env_vars_core = { git = "https://github.com/guenhter/temp_env_vars.git", branch = "main" }
+```bash
+cargo add temp_env_vars
 ```
 
 
-== Usage
+## Usage
 
 `temp_env_vars` can be used in two different forms:
 
-. as macro `#[temp_env_vars]`
-. with `TestEnvScope::new()`
+1. as macro `#[temp_env_vars]`
+2. with `TestEnvScope::new()`
 
 
-=== Use as macro
+### Use as macro
 
 `#[temp_env_vars]` is the preferred way to use the `temp_env_vars` crate.
 Every change to envionrment variables within the execution of the test function
@@ -59,7 +49,7 @@ fn test_some() {
 ```
 
 
-=== Use with TestEnvScope
+### Use with TestEnvScope
 
 If resetting the environment variables after the test execution is not sufficient, but the reset must happen somewhere within the test, the `TestEnvScope` can be used to have better control.
 
@@ -91,12 +81,12 @@ fn test_bar() {
 ```
 
 
-== Contribution
+## Contribution
 
 Contribution are always welcome in any form.
 
 You acknowledge and agree that the owner reserve the right to change the license of the Work, including but not limited to all Contributions previously submitted by You, at any time without the need for approval from You or any other contributor.
 
-== License
+## License
 
 This project is licensed under the https://github.com/guenhter/temp_env_vars/blob/main/LICENSE[MIT license].

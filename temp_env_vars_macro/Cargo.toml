@@ -1,11 +1,11 @@
 [package]
 name = "temp_env_vars_macro"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["Günther Grill <grill.guenther@gmail.com>"]
 edition = "2021"
 rust-version = "1.80"
-description = "Resets all environment variables changed in a defined scope"
-readme = "../README.adoc"
+description = "Helper crate for temp_env_vars to enable macro support"
+readme = "../README.md"
 homepage = "https://github.com/guenhter/temp_env_vars"
 repository = "https://github.com/guenhter/temp_env_vars"
 license = "MIT"
@@ -16,12 +16,12 @@ exclude = [".github/", ".vscode/"]
 [dependencies]
 quote = "1.0.36"
 syn = { version = "2.0.74", features = ["full"] }
-temp_env_vars_core = { version = "0.1.0", path = "../temp_env_vars_core" }
 
 [dev-dependencies]
 assertor = "0.0.2"
 serial_test = "3.1.1"
 anyhow = "1.0.86"
+temp_env_vars = { version = "0.1.1", path = ".." }
 
 [lib]
 proc-macro = true

@@ -19,7 +19,6 @@ jobs:
         run: cargo test --verbose
       - name: Run core tests
         run: |
-          cd temp_env_vars_core
           cargo test --verbose
       - name: Run macro tests
         run: |
