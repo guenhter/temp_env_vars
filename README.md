@@ -3,7 +3,7 @@
 [![Version](https://img.shields.io/crates/v/temp_env_vars.svg)](https://crates.io/crates/temp_env_vars)
 [![Downloads](https://img.shields.io/crates/d/temp_env_vars)](https://crates.io/crates/temp_env_vars)
 [![MIT license](https://img.shields.io/crates/l/temp_env_vars.svg)](./LICENSE)
-[![Build Status](https://github.com/guenhter/temp_env_vars/workflows/CI/badge.svg?branch=main)](https://github.com/guenhter/temp_env_vars/actions)
+[![Build Status](https://github.com/guenhter/temp_env_vars/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/guenhter/temp_env_vars/actions)
 [![MSRV: 1.80.0](https://flat.badgen.net/badge/MSRV/1.80.0/purple)](https://blog.rust-lang.org/2024/07/25/Rust-1.80.0.html)
 
 
@@ -57,7 +57,7 @@ Whenever the created `TestEnvScope` goes out of scope, all env vars are reset.
 
 ```rust
 #[test]
-#[serial] // Advices to use serial, alse parallel tests could mix up envs
+#[serial] // Use "serial" (external crate), as parallel tests could mix up envs
 fn test_some() {
     let _env_scope = TestEnvScope::new();
     std::env::set_var("FOO", "BAR");
@@ -67,7 +67,7 @@ fn test_some() {
 }
 
 #[test]
-#[serial] // Advices to use serial, alse parallel tests could mix up envs
+#[serial] // Use "serial" (external crate), as parallel tests could mix up envs
 fn test_bar() {
     let _env_scope = TestEnvScope::new();
     std::env::set_var("FOO", "BAR");
