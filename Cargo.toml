@@ -1,6 +1,6 @@
 [package]
 name = "temp_env_vars"
-version = "0.2.0"
+version = "0.2.1"
 authors = ["Günther Grill <grill.guenther@gmail.com>"]
 edition = "2021"
 rust-version = "1.80"
@@ -14,7 +14,7 @@ categories = ["development-tools::testing"]
 exclude = [".github/", ".vscode/", ".editorconfig", ".gitignore"]
 
 [dependencies]
-temp_env_vars_macro = { version = "0.2.0", path = "./temp_env_vars_macro" }
+temp_env_vars_macro = { version = "0.2.1", path = "./temp_env_vars_macro" }
 
 [dev-dependencies]
 assertor = "0.0.2"
