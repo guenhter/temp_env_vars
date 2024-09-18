@@ -38,6 +38,8 @@ If more tests are used with this macro, those tests will be executed sequentiall
 avoid an enviornment variable mixup.
 
 ```rust
+use temp_env_vars::temp_env_vars;
+
 #[test]
 #[temp_env_vars]
 fn test_some() {
@@ -58,6 +60,9 @@ used to have better control.
 Whenever the created `TempEnvScope` goes out of scope, all env vars are reset.
 
 ```rust
+use serial_test::serial;
+use temp_env_vars::TempEnvScope;
+
 #[test]
 #[serial] // Use external "serial" crate as parallel tests mix up envs
 fn test_some() {

@@ -8,7 +8,7 @@ Here are some notes when publishing a new version of the crate
 ```bash
 # Publish the macro first
 cd temp_env_vars_macro
-# Comment out the dev-dependency to the temp_env_vars
+sed -i 's/^temp_env_vars/# temp_env_vars/' Cargo.toml
 cargo publish --allow-dirty
 git checkout -- .
 

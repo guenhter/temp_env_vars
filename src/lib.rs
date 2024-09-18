@@ -20,6 +20,8 @@
 //! to avoid an enviornment variable mixup.
 //!
 //! ```rust
+//! use temp_env_vars::temp_env_vars;
+//!
 //! #[test]
 //! #[temp_env_vars]
 //! fn test_some() {
@@ -40,6 +42,9 @@
 //! Whenever the created `TempEnvScope` goes out of scope, all env vars are reset.
 //!
 //! ```rust
+//! use serial_test::serial;
+//! use temp_env_vars::TempEnvScope;
+//!
 //! #[test]
 //! #[serial] // Use external "serial" crate as parallel tests mix up envs
 //! fn test_some() {
@@ -62,6 +67,9 @@
 //!     // "FOO" is not longer set here.
 //! }
 //! ```
+
+pub use temp_env_vars_macro::temp_env_vars;
+
 use std::{
     collections::HashMap,
     sync::{Arc, LazyLock, Mutex},
@@ -83,21 +91,27 @@ impl TempEnvScope {
             original_vars: std::env::vars().collect(),
         }
     }
-}
 
-impl Drop for TempEnvScope {
-    fn drop(&mut self) {
-        let mut after: HashMap<String, String> = std::env::vars().collect();
+    /// Sets the environment variables to the state as they were
+    /// when this `TempEnvScope` was created.
+    fn restore(&self) {
+        let mut now: HashMap<String, String> = std::env::vars().collect();
 
         self.original_vars.keys().for_each(|key| {
-            after.remove(key);
+            now.remove(key);
         });
-        after.keys().for_each(|key| {
+        now.keys().for_each(|key| {
             std::env::remove_var(key);
         });
         self.original_vars.iter().for_each(|(k, v)| {
             std::env::set_var(k, v);
         });
+    }
+}
+
+impl Drop for TempEnvScope {
+    fn drop(&mut self) {
+        self.restore();
     }
 }
 
