@@ -90,4 +90,6 @@ You acknowledge and agree that the owner reserve the right to change the license
 
 ## License
 
-This project is licensed under the https://github.com/guenhter/temp_env_vars/blob/main/LICENSE[MIT license].
+This project is licensed under the [MIT license].
+
+[MIT license]: https://github.com/guenhter/temp_env_vars/blob/main/LICENSE
