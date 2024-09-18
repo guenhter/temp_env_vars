@@ -7,12 +7,11 @@
 [![MSRV: 1.80.0](https://flat.badgen.net/badge/MSRV/1.80.0/purple)](https://blog.rust-lang.org/2024/07/25/Rust-1.80.0.html)
 
 
-`temp_env_vars` allows to to manipulate enviornment variables during a test and reset all changes when the test is done.
+`temp_env_vars` allows to rest all changes to environment variables changed
+within the execution of a certain function.
 
-[!WARNING]
-
-The software currently in the starting phase and will change
-
+> [!WARNING]
+> This crate is under active development and will probably have braking changes
 
 ## Installation
 
@@ -26,16 +25,17 @@ cargo add temp_env_vars
 `temp_env_vars` can be used in two different forms:
 
 1. as macro `#[temp_env_vars]`
-2. with `TestEnvScope::new()`
+2. with `TempEnvScope::new()`
 
 
 ### Use as macro
 
 `#[temp_env_vars]` is the preferred way to use the `temp_env_vars` crate.
-Every change to envionrment variables within the execution of the test function
-will be reset after the test has ended.
+Every change to envionrment variables within the execution of the annotated function
+will be reset after the function has ended.
 
-If more tests are used with this macro, those tests will be executed sequentially to avoid an enviornment variable mixup.
+If more tests are used with this macro, those tests will be executed sequentially to
+avoid an enviornment variable mixup.
 
 ```rust
 #[test]
@@ -44,22 +44,24 @@ fn test_some() {
     std::env::set_var("FOO", "BAR");
     assert_eq!(std::env::var("FOO").unwrap(), "BAR");
 
-    // Env vars get reset when test is done
+    // Env vars get reset when this test is done
 }
 ```
 
 
-### Use with TestEnvScope
+### Use with TempEnvScope
 
-If resetting the environment variables after the test execution is not sufficient, but the reset must happen somewhere within the test, the `TestEnvScope` can be used to have better control.
+If resetting the environment variables after the function execution is not sufficient,
+but the reset must happen somewhere within the function, the `TempEnvScope` can be
+used to have better control.
 
-Whenever the created `TestEnvScope` goes out of scope, all env vars are reset.
+Whenever the created `TempEnvScope` goes out of scope, all env vars are reset.
 
 ```rust
 #[test]
-#[serial] // Use "serial" (external crate), as parallel tests could mix up envs
+#[serial] // Use external "serial" crate as parallel tests mix up envs
 fn test_some() {
-    let _env_scope = TestEnvScope::new();
+    let _env_scope = TempEnvScope::new();
     std::env::set_var("FOO", "BAR");
     assert_eq!(std::env::var("FOO").unwrap(), "BAR");
 
@@ -67,14 +69,13 @@ fn test_some() {
 }
 
 #[test]
-#[serial] // Use "serial" (external crate), as parallel tests could mix up envs
+#[serial] // Use external "serial" crate as parallel tests mix up envs
 fn test_bar() {
-    let _env_scope = TestEnvScope::new();
+    let _env_scope = TempEnvScope::new();
     std::env::set_var("FOO", "BAR");
     assert_eq!(std::env::var("FOO").unwrap(), "BAR");
 
     drop(_env_scope); // After "_env_scope" goes out of scope, all vars are restored
-
 
     // "FOO" is not longer set here.
 }

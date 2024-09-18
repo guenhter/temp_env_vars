@@ -37,7 +37,7 @@ pub fn temp_env_vars(
         *
         #vis #asynciness fn #name () #returning {
             let _temp_env_vars_scope_lock = temp_env_vars::TEMP_ENV_VAR_MACRO_MUTEX.lock();
-            let _temp_env_vars_scope = temp_env_vars::TestEnvScope::new();
+            let _temp_env_vars_scope = temp_env_vars::TempEnvScope::new();
             #block
         }
     };
