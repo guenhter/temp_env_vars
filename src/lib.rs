@@ -20,6 +20,8 @@
 //! to avoid an enviornment variable mixup.
 //!
 //! ```rust
+//! use temp_env_vars::temp_env_vars;
+//!
 //! #[test]
 //! #[temp_env_vars]
 //! fn test_some() {
@@ -40,6 +42,9 @@
 //! Whenever the created `TempEnvScope` goes out of scope, all env vars are reset.
 //!
 //! ```rust
+//! use serial_test::serial;
+//! use temp_env_vars::TempEnvScope;
+//!
 //! #[test]
 //! #[serial] // Use external "serial" crate as parallel tests mix up envs
 //! fn test_some() {
@@ -62,6 +67,9 @@
 //!     // "FOO" is not longer set here.
 //! }
 //! ```
+
+pub use temp_env_vars_macro::temp_env_vars;
+
 use std::{
     collections::HashMap,
     sync::{Arc, LazyLock, Mutex},

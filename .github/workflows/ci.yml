@@ -17,10 +17,3 @@ jobs:
       - uses: actions/checkout@v4
       - name: Run tests
         run: cargo test --verbose
-      - name: Run core tests
-        run: |
-          cargo test --verbose
-      - name: Run macro tests
-        run: |
-          cd temp_env_vars_macro
-          cargo test --verbose

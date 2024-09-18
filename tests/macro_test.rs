@@ -2,7 +2,7 @@ use core::time;
 use std::thread::sleep;
 
 use assertor::{assert_that, ResultAssertion};
-use temp_env_vars_macro::temp_env_vars;
+use temp_env_vars::temp_env_vars;
 
 #[test]
 #[temp_env_vars]
