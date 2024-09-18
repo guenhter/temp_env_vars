@@ -7,7 +7,7 @@
 [![MSRV: 1.80.0](https://flat.badgen.net/badge/MSRV/1.80.0/purple)](https://blog.rust-lang.org/2024/07/25/Rust-1.80.0.html)
 
 
-`temp_env_vars` allows to rest all changes to environment variables changed
+`temp_env_vars` allows to reset all changes to environment variables changed
 within the execution of a certain function.
 
 > [!WARNING]

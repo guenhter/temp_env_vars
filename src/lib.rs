@@ -1,6 +1,6 @@
 //! # temp_env_vars
 //!
-//! `temp_env_vars` allows to rest all changes to environment variables changed
+//! `temp_env_vars` allows to reset all changes to environment variables changed
 //! within the execution of a certain function.
 //!
 //! ## Usage
